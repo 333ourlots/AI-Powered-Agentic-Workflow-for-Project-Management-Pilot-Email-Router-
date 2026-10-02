@@ -251,8 +251,8 @@ def run_workflow(
 
 
 def main() -> None:
-    api_key = os.getenv("OPENAI_API_KEY")
-    if not api_key:
+    openai_api_key = os.getenv("OPENAI_API_KEY")
+    if not openai_api_key:
         raise RuntimeError(
             "Set OPENAI_API_KEY in your environment or a local .env file. "
             "Do not commit the key or the .env file."
@@ -265,7 +265,7 @@ def main() -> None:
     prompt = " ".join(sys.argv[2:]) if len(sys.argv) > 2 else workflow_prompt
 
     try:
-        output = run_workflow(api_key, product_spec, prompt)
+        output = run_workflow(openai_api_key, product_spec, prompt)
     except Exception as error:
         print(f"Workflow failed: {error}", file=sys.stderr)
         raise
